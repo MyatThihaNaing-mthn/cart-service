@@ -2,7 +2,6 @@ package com.thiha.sneakershop.cartservice.dto;
 
 import java.util.Date;
 import java.util.UUID;
-import com.thiha.sneakershop.cartservice.model.CartProduct;
 import java.util.List;
 import lombok.Data;
 
@@ -12,5 +11,5 @@ public class CartDto {
     private String userId;
     private Date createdAt;
     private Date updatedAt;
-    private List<CartProduct> cardProducts;
+    private List<CartProductDto> cardProducts;
 }

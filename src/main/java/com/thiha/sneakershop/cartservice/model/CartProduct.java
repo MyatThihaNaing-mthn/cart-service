@@ -15,7 +15,7 @@ import lombok.Data;
 @Table(name = "cart_products")
 public class CartProduct {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String productId;
     private int quantity;

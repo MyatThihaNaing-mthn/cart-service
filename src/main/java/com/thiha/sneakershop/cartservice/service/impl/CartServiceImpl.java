@@ -7,6 +7,8 @@ import com.thiha.sneakershop.cartservice.dto.CartDto;
 import java.util.Date;
 import java.util.UUID;
 import java.util.List;
+import java.util.Optional;
+
 import com.thiha.sneakershop.cartservice.dto.CartRequest;
 import com.thiha.sneakershop.cartservice.mapper.CartMapper;
 import com.thiha.sneakershop.cartservice.model.Cart;
@@ -24,10 +26,19 @@ public class CartServiceImpl implements CartService {
     private CartProductRepository cartProductRepository;
 
     @Override
-    public CartDto findCartByUserId(String userId) {
-        Cart cart = cartRepository.findCardByUserId(userId).orElseThrow();
-        
-        return CartMapper.mapToCartDtoFromCart(cart);
+    public CartDto findOrCreateCart(String userId) {
+        Optional<Cart> cart = cartRepository.findCardByUserId(userId);
+        if (!cart.isPresent()) {
+            Cart newCart = new Cart();
+            Date now = DateTimeHelper.getUtcNow();
+            newCart.setUserId(userId);
+            newCart.setCartProducts(null);
+            newCart.setCreatedAt(now);
+            newCart.setUpdatedAt(now);
+            Cart savedCart = cartRepository.save(newCart);
+            return CartMapper.mapToCartDtoFromCart(savedCart);
+        }
+        return CartMapper.mapToCartDtoFromCart(cart.get());
     }
 
     @Override

@@ -5,7 +5,7 @@ import com.thiha.sneakershop.cartservice.dto.CartRequest;
 import java.util.UUID;
 
 public interface CartService {
-    CartDto findCartByUserId(String userId);
+    CartDto findOrCreateCart(String userId);
     CartDto createCart(String userId);
     CartDto addItemToCart(CartRequest request, UUID cartId);
 }

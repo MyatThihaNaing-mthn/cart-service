@@ -12,10 +12,17 @@ public class CartMapper {
         CartDto dto = new CartDto();
         dto.setId(cart.getId());
         dto.setUserId(cart.getUserId());
-        List<CartProductDto> cartProductDtos = cart.getCartProducts().stream()
+        // TODO refactor after impl of adding items to cart
+        if(cart.getCartProducts() == null){
+            dto.setCardProducts(null);
+        }else{
+            List<CartProductDto> cartProductDtos = cart.getCartProducts().stream()
                                                     .map(cartProduct -> CartMapper.mapToCartProductDtoFromCartProduct(cartProduct))
                                                     .collect(Collectors.toList());
-        dto.setCardProducts(cartProductDtos);
+            dto.setCardProducts(cartProductDtos);
+        }
+        
+        
         dto.setCreatedAt(cart.getCreatedAt());
         dto.setUpdatedAt(cart.getUpdatedAt());
         

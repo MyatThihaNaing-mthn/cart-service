@@ -3,13 +3,12 @@ package com.thiha.sneakershop.cartservice.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.thiha.sneakershop.cartservice.dto.AddToCartRequest;
 import com.thiha.sneakershop.cartservice.dto.CartDto;
 import java.util.Date;
 import java.util.UUID;
 import java.util.List;
 import java.util.Optional;
-
-import com.thiha.sneakershop.cartservice.dto.CartRequest;
 import com.thiha.sneakershop.cartservice.mapper.CartMapper;
 import com.thiha.sneakershop.cartservice.model.Cart;
 import com.thiha.sneakershop.cartservice.model.CartProduct;
@@ -54,7 +53,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public CartDto addItemToCart(CartRequest request, UUID cartId) {
+    public CartDto addItemToCart(AddToCartRequest request, UUID cartId) {
 
         Cart cart = cartRepository.findById(cartId).orElseThrow();
 
